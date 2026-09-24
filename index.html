@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Birthday Oil 🌸 | เรื่องราวและความทรงจำของเรา</title>
+
+  <!-- Google Fonts: Mali & Prompt -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(180deg, #FFE5EC 0%, #FFCAD4 22%, #E0F2FE 70%, #D8E2DC 100%);
+      color: #374151;
+      min-height: 100vh;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .font-cute {
+      font-family: 'Mali', cursive;
+    }
+
+    .fade-transition {
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ดีไซน์เปลวไฟ & แสงสะท้อน */
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.65; transform: scale(1); }
+      50% { opacity: 0.95; transform: scale(1.18); }
+    }
+    .flame-aura {
+      position: absolute;
+      top: -12px;
+      width: 76px;
+      height: 76px;
+      background: radial-gradient(circle, rgba(254, 240, 138, 0.55) 0%, rgba(251, 146, 60, 0.25) 50%, transparent 75%);
+      border-radius: 50%;
+      animation: glowPulse 2s infinite ease-in-out;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    @keyframes flameDance {
+      0% { transform: scale(1) rotate(-1.5deg); }
+      25% { transform: scale(1.05, 0.96) rotate(1.5deg); }
+      50% { transform: scale(0.97, 1.05) rotate(-1deg); }
+      75% { transform: scale(1.04, 1.02) rotate(1deg); }
+      100% { transform: scale(1) rotate(-1.5deg); }
+    }
+    .flame-body {
+      position: absolute;
+      top: 6px;
+      width: 17px;
+      height: 30px;
+      background: linear-gradient(to bottom, #FFF7ED 0%, #FDE047 25%, #FB923C 70%, #F43F5E 100%);
+      border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+      box-shadow: 0 0 16px #FBBF24, 0 0 26px rgba(251, 146, 60, 0.6);
+      animation: flameDance 1.2s infinite ease-in-out;
+      transform-origin: bottom center;
+      z-index: 12;
+      transition: all 0.5s ease-out;
+    }
+
+    .flame-core {
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 15px;
+      background: #FFFFFF;
+      border-radius: 50% 50% 35% 35%;
+      opacity: 0.95;
+      box-shadow: 0 0 6px #FFFFFF;
+    }
+
+    .flame-blue-base {
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 11px;
+      height: 7px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.85) 0%, transparent 80%);
+      border-radius: 50%;
+      opacity: 0.8;
+    }
+
+    .candle-wick {
+      width: 2.5px;
+      height: 9px;
+      background: #475569;
+      border-radius: 2px;
+      margin-top: 24px;
+      z-index: 11;
+    }
+
+    .candle-stick {
+      width: 14px;
+      height: 50px;
+      background: repeating-linear-gradient(-45deg, #FFCAD4, #FFCAD4 7px, #FFFFFF 7px, #FFFFFF 14px);
+      border-radius: 4px 4px 2px 2px;
+      box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.08), inset 2px 0 3px rgba(255, 255, 255, 0.7), 0 3px 6px rgba(0, 0, 0, 0.05);
+      position: relative;
+      z-index: 11;
+    }
+
+    .candle-stick::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #FFE5EC;
+      border-radius: 50%;
+    }
+
+    @keyframes smokeDrift {
+      0% { opacity: 0.8; transform: translateY(0) scale(1) translateX(0); }
+      50% { opacity: 0.5; transform: translateY(-20px) scale(1.6) translateX(4px); }
+      100% { opacity: 0; transform: translateY(-42px) scale(2.4) translateX(-8px); }
+    }
+    .smoke-puff {
+      position: absolute;
+      top: 15px;
+      width: 7px;
+      height: 7px;
+      background: rgba(226, 232, 240, 0.85);
+      border-radius: 50%;
+      filter: blur(2px);
+      pointer-events: none;
+      display: none;
+    }
+    .smoke-active {
+      display: block;
+      animation: smokeDrift 1.5s ease-out forwards;
+    }
+
+    @keyframes boxBounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      20% { transform: translateY(-8px) rotate(-3deg); }
+      40% { transform: translateY(-8px) rotate(3deg); }
+      60% { transform: translateY(-4px) rotate(-1deg); }
+      80% { transform: translateY(-1px) rotate(1deg); }
+    }
+    .box-bounce {
+      animation: boxBounce 2.2s infinite ease-in-out;
+    }
+
+    .washi-tape {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 16px;
+      backdrop-filter: blur(2px);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      z-index: 10;
+      border-radius: 2px;
+    }
+
+    @keyframes postItSwing {
+      0%, 100% { transform: rotate(-2deg); }
+      50% { transform: rotate(2.5deg); }
+    }
+    .post-it-swing {
+      animation: postItSwing 3.5s ease-in-out infinite;
+      transform-origin: top center;
+    }
+
+    @keyframes wiggleDoll {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: rotate(6deg); }
+    }
+    .doll-swing {
+      animation: wiggleDoll 3s ease-in-out infinite;
+      transform-origin: top center;
+    }
+
+    @keyframes waveMove {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-20%); }
+      100% { transform: translateX(0); }
+    }
+    .wave-anim {
+      animation: waveMove 12s ease-in-out infinite;
+    }
+
+    @keyframes floatPetal {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      15% { opacity: 0.7; }
+      85% { opacity: 0.7; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+    .floating-petal {
+      position: fixed;
+      pointer-events: none;
+      z-index: 5;
+      animation: floatPetal linear infinite;
+    }
+
+    .polaroid-card {
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .polaroid-card:hover {
+      transform: scale(1.04) rotate(0deg) !important;
+      box-shadow: 0 14px 28px -4px rgba(244, 114, 182, 0.25);
+      z-index: 15;
+    }
+  </style>
+</head>
+<body class="relative flex flex-col items-center pb-24">
+
+  <!-- ดอกไม้ลอยพื้นหลัง -->
+  <div id="petalContainer" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
+
+  <!-- ระบบเล่นเพลง 2 ช่วง -->
+  <audio id="bgMusic1" loop preload="auto">
+    <source src="https://github.com/newtrenos/Pink-Memories/raw/refs/heads/main/Happy%20Birthday%20Piano%20Version.mp3" type="audio/mp3">
+  </audio>
+
+  <audio id="bgMusic2" loop preload="auto">
+    <source src="https://github.com/newtrenos/Pink-Memories/raw/refs/heads/main/%E0%B8%82%E0%B8%AD%E0%B8%9A%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%80%E0%B8%81%E0%B8%B4%E0%B8%94%E0%B8%A1%E0%B8%B2%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%A3%E0%B8%B1%E0%B8%81%20found%20MEAN%20ft.JIXGO%20Live%20Session.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- ปุ่มควบคุมเพลง -->
+  <div class="fixed top-4 right-4 z-50">
+    <button id="soundBtn" onclick="toggleCurrentMusic(event)" class="bg-white/85 backdrop-blur-md px-4 py-2 rounded-full shadow-md text-xs font-cute text-pink-600 border border-pink-200 flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer">
+      <span id="soundIcon">🎵</span>
+      <span id="soundLabel">กำลังเล่นเพลง</span>
+    </button>
+  </div>
+
+  <!-- ==================== หน้าที่ 1: เป่าเค้ก & รับกล่องของขวัญ ==================== -->
+  <section id="step-birthday" class="min-h-screen w-full max-w-md px-6 flex flex-col justify-center items-center text-center relative z-20 fade-transition opacity-100 transform translate-y-0">
+    
+    <div class="bg-white/75 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-cute text-pink-600 mb-6 shadow-sm border border-pink-100">
+      ☁️ 24 กันยายน • A Very Special Day for Oil
+    </div>
+
+    <h1 class="font-cute text-3xl md:text-4xl font-bold text-slate-700 mb-2 leading-tight">
+      สุขสันต์วันเกิดนะ <br><span class="text-pink-500 underline decoration-pink-300 decoration-wavy underline-offset-4">Oil</span> 🌸
+    </h1>
+    <p class="text-xs md:text-sm text-slate-500 mb-8 max-w-xs leading-relaxed">
+      ขอให้ท้องฟ้าและผืนทะเลที่สงบตรงนี้<br>มอบความสบายใจและรอยยิ้มสดใสให้กับเธอในวันนี้<br>และตลอดไปนะ
+    </p>
+
+    <div class="relative w-full max-w-[310px] min-h-[310px] flex items-center justify-center">
+
+      <!-- ตัวเค้ก -->
+      <div id="cakeCard" class="w-full bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-xl border border-pink-100 fade-transition opacity-100 transform scale-100">
+        <div class="relative w-40 h-48 mx-auto flex flex-col items-center justify-end cursor-pointer select-none" onclick="blowCandle(event)">
+          <div id="flameAura" class="flame-aura"></div>
+          <div id="smokePuff" class="smoke-puff"></div>
+
+          <div id="candleFlame" class="flame-body">
+            <div class="flame-core"></div>
+            <div class="flame-blue-base"></div>
+          </div>
+
+          <div class="candle-wick"></div>
+          <div class="candle-stick"></div>
+
+          <div class="w-28 h-12 bg-pink-100 rounded-t-2xl border-b-4 border-pink-200 flex items-center justify-around px-2 relative z-0 shadow-sm">
+            <span class="w-2.5 h-2.5 rounded-full bg-pink-300"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-pink-300"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-pink-300"></span>
+          </div>
+
+          <div class="w-36 h-14 bg-white rounded-b-2xl border-t border-pink-100 shadow-inner flex items-center justify-around px-3">
+            <span class="text-sm">🍓</span>
+            <span class="text-sm">🌸</span>
+            <span class="text-sm">🍓</span>
+          </div>
+
+          <div class="w-44 h-3.5 bg-pink-200/80 rounded-full mt-1 shadow-sm"></div>
+        </div>
+
+        <p id="cakeHint" class="text-xs font-cute text-pink-500 font-semibold mt-6 animate-pulse">
+          ✨ ตั้งใจอธิษฐานแล้วแตะที่เปลวไฟนะ ✨
+        </p>
+      </div>
+
+      <!-- กล่องของขวัญ -->
+      <div id="giftBoxContainer" class="absolute inset-0 bg-white/85 backdrop-blur-md p-6 rounded-3xl shadow-xl border border-pink-100 flex flex-col items-center justify-center fade-transition opacity-0 transform scale-75 pointer-events-none hidden">
+        <div class="box-bounce cursor-pointer my-3" onclick="openGiftBox(event)">
+          <div class="w-28 h-28 bg-gradient-to-br from-pink-400 to-rose-400 rounded-3xl shadow-2xl flex items-center justify-center text-5xl border-2 border-white relative active:scale-95 transition-transform hover:scale-105">
+            🎁
+            <div class="absolute -top-2.5 w-12 h-3 bg-pink-200 rounded-full shadow-sm"></div>
+          </div>
+        </div>
+        <p class="font-cute text-base text-pink-600 font-bold mt-3">✨ ของขวัญชิ้นพิเศษ ✨</p>
+        <p class="text-xs text-slate-500 font-light mt-1">แตะที่กล่องเพื่อเปิดดูนะ 🌸</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ==================== หน้าที่ 2: สมุดภาพความทรงจำ 24 รูป ==================== -->
+  <section id="step-memory" class="hidden opacity-0 transform translate-y-8 fade-transition w-full max-w-2xl px-4 flex-col items-center z-20 pt-8">
+
+    <div class="bg-white/85 backdrop-blur-md p-6 rounded-3xl shadow-md border border-pink-100 text-center mb-8 w-full max-w-lg">
+      <span class="text-3xl mb-2 inline-block">📖</span>
+      <h2 class="font-cute text-xl md:text-2xl font-bold text-slate-700 mb-2">ของขวัญคือ "เรื่องราวของเรา"</h2>
+      <p class="text-xs md:text-sm text-slate-600 leading-relaxed font-light">
+        ตลอดเวลา 1 ปีที่ผ่านมา <br>
+        ทุกช่วงเวลาที่มีเธอเข้ามาในชีวิต คือช่วงเวลาที่พิเศษและมีความหมายที่สุด<br>
+        นี่คือภาพส่วนหนึ่งที่บันทึกรอยยิ้มและความทรงจำของเรา 🤍
+      </p>
+    </div>
+
+    <!-- กริดแสดงรูป 24 ภาพ -->
+    <div id="memoryGrid" class="grid grid-cols-3 gap-2.5 sm:gap-4 w-full mb-12">
+      <!-- ข้อมูลเรนเดอร์ผ่าน JS -->
+    </div>
+
+    <!-- จดหมายคำอวยพร -->
+    <div class="bg-white/90 backdrop-blur-md p-6 sm:p-7 rounded-3xl shadow-lg border border-pink-100 w-full max-w-lg mb-12 relative">
+      <div class="font-cute text-pink-500 font-bold text-lg mb-3 flex items-center gap-2">
+        <span>💌</span> ถึง Oil...
+      </div>
+      <div class="text-xs md:text-sm text-slate-600 leading-relaxed space-y-3">
+        <p>
+          สุขสันต์วันเกิด ขอให้ออยมีสุขภาพแข็งแรง มีแต่สิ่งดี ๆ เข้ามาในชีวิต ไม่ว่าจะเจอเรื่องหนักใจหรือเหนื่อยล้าแค่ไหน ขอให้ผ่านพ้นไปด้วยดีเสมอ
+        </p>
+        <p>
+          ขอบคุณสำหรับความสดใส ความใจดี และทุก ๆ ความรู้สึกดี ๆ ที่มีให้กันตลอด 1 ปีที่ผ่านมานะ เราจะคอยซัพพอร์ตเธอ คอยอยู่ข้างๆ และรับฟังเธอเสมอเลย
+        </p>
+      </div>
+      <div class="text-right text-xs font-cute text-pink-400 mt-5">
+        24 กันยายน • ด้วยความปรารถนาดีเสมอ 🤍
+      </div>
+    </div>
+
+    <!-- โพสต์อิทเปิดคำถาม พร้อมตุ๊กตาน้องกระต่ายห้อย -->
+    <div class="w-full flex flex-col items-center mb-16 relative">
+      <p class="text-xs font-cute text-pink-600 font-medium mb-4 animate-bounce">
+        👇 มีอีกหนึ่งความในใจเล็กๆ ที่อยากถาม...
+      </p>
+
+      <div class="relative">
+        <!-- ตัวตุ๊กตาน้องกระต่ายห้อยดุ๊กดิ๊กด้านขวาบน -->
+        <div class="doll-swing absolute -top-14 -right-8 sm:-right-10 z-30 pointer-events-none">
+          <div class="w-1 h-5 border-l-2 border-dotted border-slate-400 absolute -top-3 left-6 opacity-75"></div>
+          <img src="bunny.png" alt="Bunny Keychain" class="w-20 sm:w-24 drop-shadow-xl select-none">
+        </div>
+
+        <!-- แผ่นโพสต์อิท -->
+        <div id="stickyPreview" onclick="revealProposal(event)" class="post-it-swing cursor-pointer relative bg-amber-100 p-6 rounded-2xl shadow-lg border border-amber-200 w-64 text-center transform hover:scale-105 active:scale-95 transition-all">
+          <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-7 h-7 bg-slate-200 rounded-full border border-slate-300 flex items-center justify-center text-xs shadow-sm z-20">
+            📌
+          </div>
+          <p class="font-cute text-sm font-bold text-amber-800">
+            คำถามสำคัญในใจ 💭
+          </p>
+          <p class="text-[11px] text-amber-700 mt-1 font-light">
+            (แตะแผ่นโพสต์อิทเพื่อเปิดอ่านนะ)
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ==================== Modal คำขอเป็นแฟน ==================== -->
+  <div id="proposalModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-500 flex items-center justify-center p-5">
+    <div class="bg-gradient-to-b from-amber-50 to-orange-50 w-full max-w-sm p-7 rounded-[2rem] shadow-2xl border-2 border-amber-200 relative text-center transform scale-90 transition-transform duration-500" id="proposalCard">
+      
+      <div class="w-14 h-14 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-4 shadow-sm animate-pulse">
+        💖
+      </div>
+
+      <h3 class="font-cute text-xl font-bold text-slate-800 mb-3">
+        ถึง Oil...
+      </h3>
+
+      <div class="text-xs md:text-sm text-slate-600 leading-relaxed mb-6 space-y-2.5">
+        <p>
+          ตลอด 1 ปีที่ผ่านมา ทุกช่วงเวลาที่ได้มี เธอ อยู่ข้างๆ คือช่วงเวลาที่ทำให้เราเติบโตมากขึ้นผ่านทั้งความทุกข์และความสุข
+        </p>
+        <p class="font-cute text-pink-600 font-semibold text-sm md:text-base px-2">
+          "จากวันนี้ไป... ขอให้เราได้เดินทางเคียงข้างกัน คอยดูแลกันและกันในฐานะ 'แฟน' ได้ไหมครับ? 🌸"
+        </p>
+      </div>
+
+      <div id="btnGroup" class="space-y-3">
+        <button onclick="acceptProposal(event, 'ตกลงนะ 💖')" class="w-full bg-gradient-to-r from-pink-400 to-rose-400 hover:from-pink-500 hover:to-rose-500 text-white font-cute font-bold py-3.5 rounded-full shadow-md shadow-pink-200 active:scale-95 transition-all text-sm flex items-center justify-center gap-2 cursor-pointer">
+          <span>ตกลงนะ 💖</span>
+        </button>
+
+        <button onclick="acceptProposal(event, 'ตกลงที่สุดเลย 🥰')" class="w-full bg-white hover:bg-pink-50 text-pink-500 border border-pink-200 font-cute font-medium py-3 rounded-full text-xs md:text-sm active:scale-95 transition-all cursor-pointer">
+          <span>ตกลงที่สุดเลย 🥰</span>
+        </button>
+      </div>
+
+      <div id="acceptedMessage" class="hidden opacity-0 transition-opacity duration-700 mt-4 pt-4 border-t border-pink-200">
+        <p class="font-cute text-lg font-bold text-pink-600 mb-1">🎉 ขอบคุณนะ 🌸</p>
+        <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+          จากนี้ไม่ว่าจะเกิดอะไรขึ้น ความทุกข์หรือความสุข เราจะมือกันไว้เสมอ... 🤍
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal ขยายภาพ (Lightbox) -->
+  <div id="photoLightbox" onclick="closeLightbox()" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300 flex flex-col items-center justify-center p-4">
+    <div class="relative max-w-sm w-full bg-white p-4 pb-6 rounded-2xl shadow-2xl text-center transform scale-95 transition-transform duration-300" id="lightboxCard" onclick="event.stopPropagation()">
+      <button onclick="closeLightbox()" class="absolute top-2 right-3 text-slate-400 hover:text-slate-600 text-xl font-bold p-1 cursor-pointer">✕</button>
+      <div class="w-full h-72 rounded-xl overflow-hidden mb-3 bg-slate-100 flex items-center justify-center">
+        <img id="lightboxImg" src="" alt="Enlarged Memory" class="w-full h-full object-cover">
+      </div>
+      <h4 id="lightboxTitle" class="font-cute text-base font-bold text-slate-800 mb-1"></h4>
+      <p id="lightboxDesc" class="text-xs text-slate-500 font-light"></p>
+    </div>
+  </div>
+
+  <!-- คลื่นทะเลด้านล่าง -->
+  <div class="fixed bottom-0 left-0 w-full overflow-hidden leading-none z-10 pointer-events-none opacity-40">
+    <svg class="w-[200%] h-20 wave-anim" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,40 L1200,120 L0,120 Z" fill="#FFFFFF"></path>
+    </svg>
+  </div>
+
+  <script>
+    /* =========================================
+       1. ข้อมูลรูปภาพ 24 รายการ
+       ========================================= */
+    const memoriesData = [
+      { id: 1, title: "Memory 1 🌸", desc: "การได้ใช้ชีวิตในวันธรรมดาด้วยกัน", tapeBg: "rgba(255, 202, 212, 0.85)", bg: "FFE5EC/D9658B", imgUrl: "https://lh3.googleusercontent.com/d/1umQDTHAx_sTpkyVhkNz5bu1HGMk2rlub" },
+      { id: 2, title: "Memory 2 🌊", desc: "การได้เฝ้ามองความสดใส", tapeBg: "rgba(224, 242, 254, 0.85)", bg: "E0F2FE/0284C7", imgUrl: "https://lh3.googleusercontent.com/d/1QEvEXhltv_x88jfKJP9Depfl233m0YbY" },
+      { id: 3, title: "Memory 3 🍽️", desc: "เก็บไว้เป็นหนึ่งในความทรงจำ", tapeBg: "rgba(254, 243, 199, 0.85)", bg: "FEF3C7/D97706", imgUrl: "https://lh3.googleusercontent.com/d/13rAF-9zOUkOiLFM3wY3t3xqFFt9NwV-D" },
+      { id: 4, title: "Memory 4 🌸", desc: "อีกหนึ่งวันที่น่ารักมากๆ", tapeBg: "rgba(224, 242, 254, 0.85)", bg: "FFE5EC/D9658B", imgUrl: "https://lh3.googleusercontent.com/d/1Kr8wJtLJ83cSuTzk1-Ditq3-a2tFyzDw" },
+      { id: 5, title: "Memory 5 🌊", desc: "เรื่องราวดีๆ ระหว่างทาง", tapeBg: "rgba(255, 202, 212, 0.85)", bg: "E0F2FE/0284C7", imgUrl: "https://lh3.googleusercontent.com/d/1KigWVQ4wvACuocdocK29QenN8YlSK9Hz" },
+      { id: 6, title: "Memory 6 🍽️", desc: "ช่วงเวลาที่อยากให้เดินช้าลงนิดนึง", tapeBg: "rgba(254, 243, 199, 0.85)", bg: "FEF3C7/D97706", imgUrl: "https://lh3.googleusercontent.com/d/14XufxVUX28ENq0cPOpJwHQF52WQ823jn" },
+      { id: 7, title: "Memory 7 🌸", desc: "เห็นเธอกอดตุ๊กตาแล้วใจฟูมาก", tapeBg: "rgba(255, 202, 212, 0.85)", bg: "FFE5EC/D9658B", imgUrl: "https://lh3.googleusercontent.com/d/1hTXBeBnBNE9_mPCQ7QUEfB9RXkoArlPb" },
+      { id: 8, title: "Memory 8 🌊", desc: "อีกหนึ่งภาพที่ได้เฝ้ามองเธอ", tapeBg: "rgba(224, 242, 254, 0.85)", bg: "E0F2FE/0284C7", imgUrl: "https://lh3.googleusercontent.com/d/1IOThmlt5hZ2CQUNDh9inpWMy3aK04V7t" },
+      { id: 9, title: "Memory 9 🍽️", desc: "การได้ทำงานด้วยกัน", tapeBg: "rgba(254, 243, 199, 0.85)", bg: "FEF3C7/D97706", imgUrl: "https://lh3.googleusercontent.com/d/1SOi6NrCJ3b7rfF_Lz9t0Rb38XLPlU14e" },
+      { id: 10, title: "Memory 10 🌸", desc: "วันเบาๆ ที่เติมพลังให้หัวใจ", tapeBg: "rgba(255, 202, 212, 0.85)", bg: "FFE5EC/D9658B", imgUrl: "https://lh3.googleusercontent.com/d/1MCvf4JPQExeXnDww1B9xsFZHGh6mCjog" },
+      { id: 11, title: "Memory 11 🌊", desc: "55555555", tapeBg: "rgba(224, 242, 254, 0.85)", bg: "E0F2FE/0284C7", imgUrl: "https://lh3.googleusercontent.com/d/1FPBmB35qDzONPF5lkfYwoL0QQbscVYHb" },
+      { id: 12, title: "Memory 12 🍽️", desc: "อีกหนึ่งช่วงเวลาที่น่าจดจำ", tapeBg: "rgba(254, 243, 199, 0.85)", bg: "FEF3C7/D97706", imgUrl: "https://lh3.googleusercontent.com/d/1EWAdc9A7jRIqST0Zeu5i8y0DNZETj4W7" },
+      { id: 13, title: "Memory 13 🌸", desc: "มุมนี้ก็น่ารักกก", tapeBg: "rgba(255, 202, 212, 0.85)", bg: "FFE5EC/D9658B", imgUrl: "https://lh3.googleusercontent.com/d/1Gz7HCoeAVldLES1CKlI6tMSR3uddDHYf" },
+      { id: 14, title: "Memory 14 🌊", desc: "รูปหลุดที่น่ารักกกสุดๆ ฮ่าๆๆ", tapeBg: "rgba(224, 242, 254, 0.85)", bg: "E0F2FE/0284C7", imgUrl: "https://lh3.googleusercontent.com/d/1z9RvF-vQeNTXzQj72NnKzN7EC9-RQiuI" },
+      { id: 15, title: "Memory 15 🍽️", desc: "ความสุขในความสงบ", tapeBg: "rgba(254, 243, 199, 0.85)", bg: "FEF3C7/D97706", imgUrl: "https://lh3.googleusercontent.com/d/1S_01bvg-tw0FSn7MjMTKNZRVryZwrKEg" },
+      { id: 16, title: "Memory 16 🌸", desc: "กำลังใจดีๆ ในวันที่เหนื่อย ฮ่าๆๆ", tapeBg: "rgba(255, 202, 212, 0.85)", bg: "FFE5EC/D9658B", imgUrl: "https://lh3.googleusercontent.com/d/1XlRyEm6tyvB9zbd6Zps2sa54RbBxkqes" },
+      { id: 17, title: "Memory 17 🌊", desc: "ยินดีที่ได้ดูแลเธอนะ", tapeBg: "rgba(224, 242, 254, 0.85)", bg: "E0F2FE/0284C7", imgUrl: "https://lh3.googleusercontent.com/d/10JQEJjSMVBCJ6RSVV-A-ZLnMxejzG242" },
+      { id: 18, title: "Memory 18 🍽️", desc: "แม้บางครั้งจะมีคน(ตัว)อื่นดูแลแล้ว", tapeBg: "rgba(254, 243, 199, 0.85)", bg: "FEF3C7/D97706", imgUrl: "https://lh3.googleusercontent.com/d/1nYnrPHZYTCYg3Bcv2DGL0JzWMq4Fhglf" },
+      { id: 19, title: "Memory 19 🌸", desc: "😳", tapeBg: "rgba(255, 202, 212, 0.85)", bg: "FFE5EC/D9658B", imgUrl: "https://lh3.googleusercontent.com/d/1Np8rSl6ffWEsweYztLfwgzQyS3qgqtRi" },
+      { id: 20, title: "Memory 20 🌊", desc: "😊", tapeBg: "rgba(224, 242, 254, 0.85)", bg: "E0F2FE/0284C7", imgUrl: "https://lh3.googleusercontent.com/d/1GzVitSxC7AgOoQ94vbq3W69w5bIEvcy4" },
+      { id: 21, title: "Memory 21 🍽️", desc: "ในใจเราเธอสวยกว่าในรูปอีก", tapeBg: "rgba(254, 243, 199, 0.85)", bg: "FEF3C7/D97706", imgUrl: "https://lh3.googleusercontent.com/d/1sQ-Vn1JUPda2dxM6pp3nYsKqbjT1new2" },
+      { id: 22, title: "Memory 22 🌸", desc: "โมเมนต์ดีๆ ที่อยากเก็บไว้ใกล้นานๆ", tapeBg: "rgba(255, 202, 212, 0.85)", bg: "FFE5EC/D9658B", imgUrl: "https://lh3.googleusercontent.com/d/10dlzC47L3Z78Y7b0P8LdOQVpgr0eN7uC" },
+      { id: 23, title: "Memory 23 🌊", desc: "😄", tapeBg: "rgba(224, 242, 254, 0.85)", bg: "E0F2FE/0284C7", imgUrl: "https://lh3.googleusercontent.com/d/1DAz6LQNNn5Bb_byRjIqQ0BWhQ8n9xC9F" },
+      { id: 24, title: "Memory 24 🍽️", desc: "ขอบคุณที่มีกันและกันนะ", tapeBg: "rgba(254, 243, 199, 0.85)", bg: "FEF3C7/D97706", imgUrl: "https://lh3.googleusercontent.com/d/1pgXfPwVkMRLNEXoWbfPYrsuzKv53Rizp" }
+    ];
+
+    function renderMemoryCards() {
+      const grid = document.getElementById('memoryGrid');
+      const rotations = ['rotate-[-1.5deg]', 'rotate-[1.5deg]', 'rotate-[-2deg]', 'rotate-[2deg]'];
+
+      grid.innerHTML = memoriesData.map((item, index) => {
+        const rot = rotations[index % rotations.length];
+        const photoImg = item.imgUrl && item.imgUrl.trim() !== "" ? item.imgUrl : `https://placehold.co/400x520/${item.bg}?text=Oil+${item.id}`;
+
+        return `
+          <div onclick="openLightbox('${photoImg}', '${item.title}', '${item.desc}')" 
+               class="polaroid-card bg-white p-2 sm:p-3 pb-3 sm:pb-4 rounded-xl sm:rounded-2xl shadow-sm border border-slate-100 relative ${rot} cursor-pointer">
+            <div class="washi-tape" style="background: ${item.tapeBg};"></div>
+            <div class="w-full h-28 sm:h-36 md:h-44 bg-slate-50 rounded-lg sm:rounded-xl overflow-hidden mb-1.5 sm:mb-2 flex items-center justify-center border border-pink-50 relative group">
+              <img src="${photoImg}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x520/FFE5EC/D9658B?text=Oil+Memory';">
+              <div class="absolute inset-0 bg-black/15 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-[10px] sm:text-xs">
+                🔍 ขยาย
+              </div>
+            </div>
+            <p class="font-cute text-[11px] sm:text-xs font-semibold text-slate-700 text-center truncate">${item.title}</p>
+            <p class="text-[9px] sm:text-[10px] text-slate-500 text-center leading-tight mt-0.5 truncate">${item.desc}</p>
+          </div>
+        `;
+      }).join('');
+    }
+
+    renderMemoryCards();
+
+    function openLightbox(imgSrc, title, desc) {
+      const modal = document.getElementById('photoLightbox');
+      const card = document.getElementById('lightboxCard');
+      document.getElementById('lightboxImg').src = imgSrc;
+      document.getElementById('lightboxTitle').textContent = title;
+      document.getElementById('lightboxDesc').textContent = desc;
+
+      modal.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        modal.classList.remove('opacity-0');
+        card.classList.remove('scale-95');
+        card.classList.add('scale-100');
+      });
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('photoLightbox');
+      const card = document.getElementById('lightboxCard');
+      modal.classList.add('opacity-0');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 300);
+    }
+
+    function spawnFloatingPetals() {
+      const container = document.getElementById('petalContainer');
+      const petalChars = ['🌸', '✨', '🤍', '🌷', '🫧'];
+      for (let i = 0; i < 16; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'floating-petal text-sm select-none';
+        petal.textContent = petalChars[Math.floor(Math.random() * petalChars.length)];
+        petal.style.left = Math.random() * 100 + 'vw';
+        petal.style.top = (100 + Math.random() * 20) + 'vh';
+        petal.style.animationDuration = (8 + Math.random() * 10) + 's';
+        petal.style.animationDelay = (Math.random() * 8) + 's';
+        petal.style.fontSize = (12 + Math.random() * 14) + 'px';
+        container.appendChild(petal);
+      }
+    }
+    spawnFloatingPetals();
+
+    /* =========================================
+       2. ระบบเล่นเพลงอัตโนมัติ & สลับเพลงไร้รอยต่อ
+       ========================================= */
+    const music1 = document.getElementById('bgMusic1');
+    const music2 = document.getElementById('bgMusic2');
+    let activeMusic = music1;
+    let isMutedByUser = false;
+    let crossfadeTimer = null;
+
+    function tryAutoPlayMusic() {
+      if (isMutedByUser) return;
+      music1.volume = 1;
+      music1.play().then(() => {
+        updateSoundUI(true);
+        removeInteractionListeners();
+      }).catch(() => {
+        updateSoundUI(false);
+      });
+    }
+
+    function onUserFirstInteract() {
+      if (!isMutedByUser && activeMusic.paused) {
+        activeMusic.play().then(() => {
+          updateSoundUI(true);
+        }).catch(() => {});
+      }
+      removeInteractionListeners();
+    }
+
+    function removeInteractionListeners() {
+      ['click', 'touchstart', 'scroll'].forEach(evt => {
+        window.removeEventListener(evt, onUserFirstInteract);
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      tryAutoPlayMusic();
+      ['click', 'touchstart', 'scroll'].forEach(evt => {
+        window.addEventListener(evt, onUserFirstInteract, { once: true, passive: true });
+      });
+    });
+
+    function toggleCurrentMusic(e) {
+      if (e) e.stopPropagation();
+      if (activeMusic.paused) {
+        activeMusic.play().then(() => {
+          isMutedByUser = false;
+          updateSoundUI(true);
+        }).catch(err => console.warn(err));
+      } else {
+        activeMusic.pause();
+        isMutedByUser = true;
+        updateSoundUI(false);
+      }
+    }
+
+    function updateSoundUI(isPlaying) {
+      const icon = document.getElementById('soundIcon');
+      const label = document.getElementById('soundLabel');
+      if (isPlaying) {
+        icon.textContent = '🎵';
+        label.textContent = 'กำลังเล่นเพลง';
+      } else {
+        icon.textContent = '🔇';
+        label.textContent = 'เปิดเพลง';
+      }
+    }
+
+    function transitionToStage2Music() {
+      if (crossfadeTimer) {
+        clearInterval(crossfadeTimer);
+        crossfadeTimer = null;
+      }
+
+      activeMusic = music2;
+
+      if (isMutedByUser) {
+        music1.pause();
+        music1.currentTime = 0;
+        return;
+      }
+
+      music2.volume = 0;
+      music2.currentTime = 0;
+
+      const playPromise = music2.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          updateSoundUI(true);
+          const duration = 2000;
+          const stepInterval = 50;
+          const steps = duration / stepInterval;
+          let currentStep = 0;
+
+          crossfadeTimer = setInterval(() => {
+            currentStep++;
+            const progress = currentStep / steps;
+
+            music1.volume = Math.max(0, 1 - progress);
+            music2.volume = Math.min(1, progress);
+
+            if (currentStep >= steps) {
+              clearInterval(crossfadeTimer);
+              crossfadeTimer = null;
+              music1.pause();
+              music1.currentTime = 0;
+              music1.volume = 0;
+              music2.volume = 1;
+            }
+          }, stepInterval);
+        }).catch(err => {
+          console.warn("Autoplay failed for music 2:", err);
+          music1.pause();
+          music1.currentTime = 0;
+        });
+      } else {
+        music1.pause();
+        music1.currentTime = 0;
+      }
+    }
+
+    /* =========================================
+       3. การเป่าเทียน
+       ========================================= */
+    let candleBlown = false;
+
+    function blowCandle(e) {
+      if (e) e.stopPropagation();
+      if (candleBlown) return;
+      candleBlown = true;
+
+      const flame = document.getElementById('candleFlame');
+      const aura = document.getElementById('flameAura');
+      const smoke = document.getElementById('smokePuff');
+      const hint = document.getElementById('cakeHint');
+      const cakeCard = document.getElementById('cakeCard');
+      const giftBox = document.getElementById('giftBoxContainer');
+
+      flame.style.transform = 'scale(0)';
+      flame.style.opacity = '0';
+      aura.style.opacity = '0';
+      smoke.classList.add('smoke-active');
+
+      confetti({
+        particleCount: 70,
+        spread: 65,
+        origin: { y: 0.6 },
+        colors: ['#FFCAD4', '#B5E2FA', '#FDE2E4', '#FFE5D9']
+      });
+
+      hint.innerHTML = '🎉 อธิษฐานสำเร็จแล้วนะ! 🌸';
+
+      setTimeout(() => {
+        cakeCard.classList.remove('opacity-100', 'scale-100');
+        cakeCard.classList.add('opacity-0', 'scale-90');
+
+        setTimeout(() => {
+          cakeCard.classList.add('hidden');
+          giftBox.classList.remove('hidden');
+
+          requestAnimationFrame(() => {
+            setTimeout(() => {
+              giftBox.classList.remove('opacity-0', 'scale-75', 'pointer-events-none');
+              giftBox.classList.add('opacity-100', 'scale-100');
+
+              confetti({
+                particleCount: 50,
+                spread: 75,
+                origin: { y: 0.55 },
+                colors: ['#FFCAD4', '#FFD166', '#E2ECE9']
+              });
+            }, 50);
+          });
+        }, 750);
+      }, 1200);
+    }
+
+    /* =========================================
+       4. เปิดกล่องของขวัญ
+       ========================================= */
+    function openGiftBox(e) {
+      if (e) e.stopPropagation();
+
+      transitionToStage2Music();
+
+      confetti({
+        particleCount: 120,
+        spread: 90,
+        origin: { y: 0.5 },
+        colors: ['#FFB5A7', '#FCD5CE', '#F8EDEB', '#F9DCC4']
+      });
+
+      const step1 = document.getElementById('step-birthday');
+      const step2 = document.getElementById('step-memory');
+
+      step1.classList.remove('opacity-100', 'translate-y-0');
+      step1.classList.add('opacity-0', '-translate-y-8');
+
+      setTimeout(() => {
+        step1.classList.add('hidden');
+        step2.classList.remove('hidden');
+        step2.classList.add('flex');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            step2.classList.remove('opacity-0', 'translate-y-8');
+            step2.classList.add('opacity-100', 'translate-y-0');
+          }, 50);
+        });
+      }, 650);
+    }
+
+    /* =========================================
+       5. คำขอเป็นแฟน และ Webhook Formspree
+       ========================================= */
+    function sendEmailNotification(chosenAnswer) {
+      const formspreeUrl = "https://formspree.io/f/xqpabyld";
+
+      fetch(formspreeUrl, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          "เรื่อง": "🎉 ออยตอบตกลงเป็นแฟนแล้ว!",
+          "คำตอบ": chosenAnswer,
+          "วันที่และเวลา": new Date().toLocaleString("th-TH")
+        })
+      }).catch(err => console.warn("Notification error:", err));
+    }
+
+    function revealProposal(e) {
+      if (e) e.stopPropagation();
+      const modal = document.getElementById('proposalModal');
+      const card = document.getElementById('proposalCard');
+      
+      if (crossfadeTimer) {
+        clearInterval(crossfadeTimer);
+        crossfadeTimer = null;
+      }
+      music1.pause();
+      music1.currentTime = 0;
+      music1.volume = 0;
+
+      modal.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          modal.classList.remove('opacity-0');
+          modal.classList.add('opacity-100');
+          card.classList.remove('scale-90');
+          card.classList.add('scale-100');
+        }, 30);
+      });
+    }
+
+    function acceptProposal(e, chosenText = "ตกลงนะ 💖") {
+      if (e) e.stopPropagation();
+
+      music1.pause();
+      music1.currentTime = 0;
+
+      sendEmailNotification(chosenText);
+
+      const end = Date.now() + 3.5 * 1000;
+      const colors = ['#E27396', '#FFCAD4', '#FFCCD5', '#FFF0F3', '#FFE5EC'];
+
+      (function frame() {
+        confetti({
+          particleCount: 7,
+          angle: 60,
+          spread: 70,
+          origin: { x: 0 },
+          colors: colors
+        });
+        confetti({
+          particleCount: 7,
+          angle: 120,
+          spread: 70,
+          origin: { x: 1 },
+          colors: colors
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      }());
+
+      const btnGroup = document.getElementById('btnGroup');
+      const acceptedMessage = document.getElementById('acceptedMessage');
+
+      btnGroup.style.transition = 'opacity 0.4s ease';
+      btnGroup.style.opacity = '0';
+      
+      setTimeout(() => {
+        btnGroup.classList.add('hidden');
+        acceptedMessage.classList.remove('hidden');
+        setTimeout(() => {
+          acceptedMessage.classList.remove('opacity-0');
+          acceptedMessage.classList.add('opacity-100');
+        }, 50);
+      }, 400);
+    }
+  </script>
+</body>
+</html>

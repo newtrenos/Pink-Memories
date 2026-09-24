@@ -42,39 +42,43 @@
 
     /* Candle Flame & Glow Animations */
     @keyframes glowPulse {
-      0%, 100% { opacity: 0.6; transform: scale(1); }
-      50% { opacity: 0.95; transform: scale(1.18); }
+      0%, 100% { opacity: 0.65; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.95; transform: translate(-50%, -50%) scale(1.15); }
     }
     .flame-aura {
       position: absolute;
-      top: -14px;
-      width: 80px;
-      height: 80px;
-      background: radial-gradient(circle, rgba(254, 240, 138, 0.6) 0%, rgba(251, 146, 60, 0.25) 50%, transparent 75%);
+      top: 18px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 95px;
+      height: 95px;
+      background: radial-gradient(circle, rgba(254, 240, 138, 0.85) 0%, rgba(251, 146, 60, 0.4) 45%, rgba(244, 63, 94, 0.1) 68%, transparent 75%);
       border-radius: 50%;
       animation: glowPulse 2s infinite ease-in-out;
       pointer-events: none;
-      z-index: 10;
+      z-index: 28;
     }
 
     @keyframes flameDance {
-      0% { transform: scale(1) rotate(-1.5deg); }
-      25% { transform: scale(1.06, 0.94) rotate(1.5deg); }
-      50% { transform: scale(0.96, 1.05) rotate(-1deg); }
-      75% { transform: scale(1.04, 1.02) rotate(1deg); }
-      100% { transform: scale(1) rotate(-1.5deg); }
+      0% { transform: translateX(-50%) scale(1) rotate(-1.5deg); }
+      20% { transform: translateX(-50%) scale(1.08, 0.92) rotate(2deg); }
+      45% { transform: translateX(-50%) scale(0.94, 1.06) rotate(-1.5deg); }
+      70% { transform: translateX(-50%) scale(1.05, 1.01) rotate(1deg); }
+      100% { transform: translateX(-50%) scale(1) rotate(-1.5deg); }
     }
     .flame-body {
       position: absolute;
-      top: 6px;
+      top: 4px;
+      left: 50%;
+      transform: translateX(-50%);
       width: 18px;
       height: 32px;
-      background: linear-gradient(to bottom, #FFF7ED 0%, #FDE047 25%, #FB923C 70%, #F43F5E 100%);
+      background: linear-gradient(to bottom, #FFFFFF 0%, #FFFBEB 15%, #FDE047 40%, #FB923C 75%, #F43F5E 100%);
       border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
-      box-shadow: 0 0 16px #FBBF24, 0 0 28px rgba(251, 146, 60, 0.65);
-      animation: flameDance 1.2s infinite ease-in-out;
+      box-shadow: 0 0 16px #FDE047, 0 0 26px rgba(251, 146, 60, 0.75), inset 0 -2px 5px rgba(225, 29, 72, 0.4);
+      animation: flameDance 1.25s infinite ease-in-out;
       transform-origin: bottom center;
-      z-index: 12;
+      z-index: 30;
       transition: all 0.5s ease-out;
     }
 
@@ -84,11 +88,11 @@
       left: 50%;
       transform: translateX(-50%);
       width: 6px;
-      height: 15px;
+      height: 16px;
       background: #FFFFFF;
       border-radius: 50% 50% 35% 35%;
       opacity: 0.95;
-      box-shadow: 0 0 6px #FFFFFF;
+      box-shadow: 0 0 8px #FFFFFF;
     }
 
     .flame-blue-base {
@@ -96,30 +100,36 @@
       bottom: -1px;
       left: 50%;
       transform: translateX(-50%);
-      width: 11px;
-      height: 7px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.9) 0%, transparent 80%);
+      width: 12px;
+      height: 8px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.95) 0%, rgba(14, 165, 233, 0.45) 60%, transparent 85%);
       border-radius: 50%;
-      opacity: 0.85;
+      opacity: 0.95;
     }
 
     .candle-wick {
       width: 2.5px;
-      height: 10px;
-      background: #475569;
+      height: 8px;
+      background: linear-gradient(to top, #0f172a, #475569);
       border-radius: 2px;
-      margin-top: 25px;
-      z-index: 11;
+      position: absolute;
+      top: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 29;
     }
 
     .candle-stick {
-      width: 14px;
-      height: 52px;
+      width: 15px;
+      height: 60px;
       background: repeating-linear-gradient(-45deg, #FFCAD4, #FFCAD4 7px, #FFFFFF 7px, #FFFFFF 14px);
-      border-radius: 4px 4px 2px 2px;
-      box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.08), inset 2px 0 3px rgba(255, 255, 255, 0.7), 0 3px 6px rgba(0, 0, 0, 0.06);
-      position: relative;
-      z-index: 11;
+      border-radius: 4px 4px 0 0;
+      box-shadow: inset -2.5px 0 5px rgba(0, 0, 0, 0.14), inset 2.5px 0 3px rgba(255, 255, 255, 0.9), 0 3px 6px rgba(0, 0, 0, 0.1);
+      position: absolute;
+      top: 38px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
     }
 
     .candle-stick::before {
@@ -129,18 +139,20 @@
       left: 0;
       width: 100%;
       height: 4px;
-      background: #FFE5EC;
+      background: #FFF0F3;
       border-radius: 50%;
     }
 
     @keyframes smokeDrift {
-      0% { opacity: 0.8; transform: translateY(0) scale(1) translateX(0); }
-      50% { opacity: 0.5; transform: translateY(-22px) scale(1.7) translateX(5px); }
-      100% { opacity: 0; transform: translateY(-46px) scale(2.6) translateX(-8px); }
+      0% { opacity: 0.85; transform: translateY(0) scale(1) translateX(0); }
+      50% { opacity: 0.55; transform: translateY(-24px) scale(1.8) translateX(6px); }
+      100% { opacity: 0; transform: translateY(-48px) scale(2.8) translateX(-10px); }
     }
     .smoke-puff {
       position: absolute;
       top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
       width: 8px;
       height: 8px;
       background: rgba(226, 232, 240, 0.9);
@@ -148,6 +160,7 @@
       filter: blur(2px);
       pointer-events: none;
       display: none;
+      z-index: 35;
     }
     .smoke-active {
       display: block;
@@ -188,8 +201,8 @@
     }
 
     @keyframes wiggleDoll {
-      0%, 100% { transform: rotate(-3deg); }
-      50% { transform: rotate(5deg); }
+      0%, 100% { transform: rotate(-4deg); }
+      50% { transform: rotate(6deg); }
     }
     .doll-swing {
       animation: wiggleDoll 3s ease-in-out infinite;
@@ -251,11 +264,11 @@
 
   <!-- Audio Players for Stage 1 and Stage 2 -->
   <audio id="bgMusic1" loop preload="auto">
-    <source src="https://github.com/newtrenos/Pink-Memories/raw/refs/heads/main/Happy%20Birthday%20Piano%20Version.mp3" type="audio/mp3">
+    <source src="Happy%20Birthday%20Piano%20Version.mp3" type="audio/mp3">
   </audio>
 
   <audio id="bgMusic2" loop preload="auto">
-    <source src="https://github.com/newtrenos/Pink-Memories/raw/refs/heads/main/%E0%B8%82%E0%B8%AD%E0%B8%9A%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%80%E0%B8%81%E0%B8%B4%E0%B8%94%E0%B8%A1%E0%B8%B2%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%A3%E0%B8%B1%E0%B8%81%20found%20MEAN%20ft.JIXGO%20Live%20Session.mp3" type="audio/mp3">
+    <source src="%E0%B8%82%E0%B8%AD%E0%B8%9A%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%80%E0%B8%81%E0%B8%B4%E0%B8%94%E0%B8%A1%E0%B8%B2%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%A3%E0%B8%B1%E0%B8%81%20found%20MEAN%20ft.JIXGO%20Live%20Session.mp3" type="audio/mp3">
   </audio>
 
   <!-- Top Controls: Music Toggle -->
@@ -292,45 +305,38 @@
         <span class="sparkle-star absolute top-10 right-8 text-pink-300 text-base pointer-events-none select-none" style="animation-delay: 1s;">🌸</span>
         <span class="sparkle-star absolute bottom-16 left-8 text-rose-300 text-xs pointer-events-none select-none" style="animation-delay: 1.5s;">💖</span>
 
-        <!-- Floating Cake & Tap Flame to Blow -->
-        <div class="cake-floating relative w-52 h-64 mx-auto flex flex-col items-center justify-end cursor-pointer select-none group" onclick="blowCandle(event)">
+        <!-- Floating Cake Container -->
+        <div class="cake-floating relative w-60 h-64 mx-auto cursor-pointer select-none group" onclick="blowCandle(event)">
           
-          <!-- Candle Flame & Auras -->
-          <div id="flameAura" class="flame-aura"></div>
-          <div id="smokePuff" class="smoke-puff"></div>
+          <!-- CANDLE UNIT: แท่งเทียนปักลึกลงไปหลังเค้กชั้นบน พร้อมเปลวไฟอยู่ด้านหน้าสุด -->
+          <div class="absolute left-1/2 -translate-x-1/2 top-3 w-28 h-28 pointer-events-none">
+            <!-- แสงเรือง Aura อยู่กึ่งกลางเปลวไฟ -->
+            <div id="flameAura" class="flame-aura"></div>
+            <div id="smokePuff" class="smoke-puff"></div>
 
-          <div id="candleFlame" class="flame-body">
-            <div class="flame-core"></div>
-            <div class="flame-blue-base"></div>
-          </div>
-
-          <!-- Wick -->
-          <div class="candle-wick"></div>
-          
-          <!-- Candle Stick -->
-          <div class="relative z-20">
-            <div class="candle-stick shadow-sm"></div>
-            <div class="w-5 h-1.5 bg-gradient-to-r from-amber-300 via-yellow-100 to-amber-300 rounded-full mx-auto -mt-1 border border-amber-400/40"></div>
-          </div>
-
-          <!-- Cake Toppings: Berries & Whipped Cream -->
-          <div class="relative z-20 flex items-end justify-center -mb-2 w-full px-8">
-            <span class="text-sm drop-shadow-md transform -rotate-12 hover:scale-125 transition-transform">🫐</span>
-            <div class="w-5 h-5 bg-gradient-to-b from-white to-pink-50 rounded-full border border-pink-100 shadow-sm flex items-center justify-center -mx-1 z-10">
-              <span class="w-1.5 h-1.5 bg-pink-300 rounded-full"></span>
+            <!-- เปลวไฟด้านหน้า (z-index: 30) -->
+            <div id="candleFlame" class="flame-body">
+              <div class="flame-core"></div>
+              <div class="flame-blue-base"></div>
             </div>
-            <span class="text-xl drop-shadow-md transform -translate-y-1 hover:scale-125 transition-transform">🍓</span>
-            <div class="w-5 h-5 bg-gradient-to-b from-white to-pink-50 rounded-full border border-pink-100 shadow-sm flex items-center justify-center -mx-1 z-10">
-              <span class="w-1.5 h-1.5 bg-pink-300 rounded-full"></span>
-            </div>
-            <span class="text-sm drop-shadow-md transform rotate-12 hover:scale-125 transition-transform">🍓</span>
-          </div>
 
-          <!-- Cake Tier 1 -->
-          <div class="w-36 h-16 bg-gradient-to-b from-[#FFFDF9] via-[#FFF8FA] to-[#FFE9EE] rounded-t-[1.6rem] border-x-2 border-t-2 border-pink-200/90 shadow-[inset_0_2px_4px_rgba(255,255,255,0.8),0_6px_12px_rgba(244,63,94,0.12)] flex flex-col justify-between items-center relative z-10 overflow-hidden">
+            <!-- ไส้เทียน -->
+            <div class="candle-wick"></div>
             
+            <!-- แท่งเทียน (z-index: 10 จะถูกหน้าเค้กชั้นบนทับบังโคนไว้ ไม่ลอย) -->
+            <div class="candle-stick"></div>
+          </div>
+
+          <!-- TOP TIER CAKE (เค้กชั้นบน: z-index: 25 ทับบังโคนเทียนไว้มิดชิด) -->
+          <div class="absolute left-1/2 -translate-x-1/2 top-[76px] w-[150px] h-18 bg-gradient-to-b from-[#FFFDF9] via-[#FFF8FA] to-[#FFE9EE] rounded-t-[1.8rem] border-x-2 border-t-2 border-pink-200/90 shadow-[inset_0_3px_5px_rgba(255,255,255,0.9),0_6px_14px_rgba(244,63,94,0.12)] z-25 flex flex-col justify-between items-center overflow-hidden">
+            
+            <!-- ฐานวิปครีมหน้าเค้กโอบรอบโคนเทียนแบบ 3 มิติ -->
+            <div class="w-full flex justify-center -mt-1 relative z-30">
+              <div class="w-8 h-2.5 bg-gradient-to-r from-pink-100 via-white to-pink-100 rounded-full border border-pink-200/70 shadow-xs"></div>
+            </div>
+
             <!-- Silky Strawberry Jam Drip -->
-            <div class="w-full relative">
+            <div class="w-full relative mt-2">
               <svg class="w-full h-7 text-rose-500 fill-current drop-shadow-[0_2px_3px_rgba(225,29,72,0.25)]" viewBox="0 0 140 28" preserveAspectRatio="none">
                 <path d="M0,0 L140,0 L140,8 C135,16 130,17 125,10 C120,3 115,20 108,20 C101,20 98,6 92,6 C86,6 83,24 75,24 C67,24 64,8 58,8 C52,8 48,18 41,18 C34,18 31,4 25,4 C19,4 15,16 8,14 C4,13 2,5 0,8 Z"></path>
               </svg>
@@ -347,8 +353,22 @@
             </div>
           </div>
 
+          <!-- TOPPINGS: สตรอว์เบอร์รีประดับตกแต่งด้านข้างซ้าย-ขวาบนขอบเค้ก -->
+          <div class="absolute left-1/2 -translate-x-1/2 top-[68px] w-[190px] flex justify-between px-2 z-28 pointer-events-none">
+            <!-- ฝั่งซ้าย -->
+            <div class="flex items-center gap-0.5 transform -rotate-12">
+              <span class="text-sm drop-shadow-md">🫐</span>
+              <span class="text-base drop-shadow-md">🍓</span>
+            </div>
+            <!-- ฝั่งขวา -->
+            <div class="flex items-center gap-0.5 transform rotate-12">
+              <span class="text-base drop-shadow-md">🍓</span>
+              <span class="text-sm drop-shadow-md">🫐</span>
+            </div>
+          </div>
+
           <!-- Cream Pearl Ribbon separator -->
-          <div class="w-40 h-3 bg-gradient-to-r from-pink-100 via-white to-pink-100 rounded-full shadow-sm z-20 -my-1.5 border border-pink-200/70 flex items-center justify-around px-1">
+          <div class="absolute left-1/2 -translate-x-1/2 top-[146px] w-44 h-3.5 bg-gradient-to-r from-pink-100 via-white to-pink-100 rounded-full shadow-sm z-30 border border-pink-200/80 flex items-center justify-around px-1.5">
             <span class="w-2 h-2 rounded-full bg-white shadow-xs"></span>
             <span class="w-2 h-2 rounded-full bg-white shadow-xs"></span>
             <span class="w-2 h-2 rounded-full bg-white shadow-xs"></span>
@@ -358,8 +378,8 @@
             <span class="w-2 h-2 rounded-full bg-white shadow-xs"></span>
           </div>
 
-          <!-- Cake Tier 2 -->
-          <div class="w-48 h-20 bg-gradient-to-b from-[#FFD8E2] via-[#FFC0D0] to-[#FFA8BF] rounded-b-2xl border-2 border-pink-300/80 shadow-[inset_0_2px_4px_rgba(255,255,255,0.6),0_10px_20px_rgba(225,29,72,0.18)] flex flex-col justify-between items-center px-3 py-2 relative z-0">
+          <!-- BOTTOM TIER CAKE (เค้กชั้นล่าง) -->
+          <div class="absolute left-1/2 -translate-x-1/2 top-[148px] w-52 h-20 bg-gradient-to-b from-[#FFD8E2] via-[#FFC0D0] to-[#FFA8BF] rounded-b-2xl border-2 border-pink-300/80 shadow-[inset_0_2px_4px_rgba(255,255,255,0.6),0_10px_20px_rgba(225,29,72,0.18)] flex flex-col justify-between items-center px-3 py-2 z-20">
             <div class="w-full h-1.5 bg-gradient-to-r from-rose-400 via-rose-500 to-rose-400 rounded-full shadow-inner opacity-80 mt-1"></div>
 
             <!-- Plaque with Birthday Wish -->
@@ -376,17 +396,16 @@
             </div>
           </div>
 
-          <!-- Ceramic Cake Stand -->
-          <div class="relative w-56 flex flex-col items-center mt-0.5 z-10">
+          <!-- Ceramic Cake Stand (จานรองเค้ก) -->
+          <div class="absolute left-1/2 -translate-x-1/2 top-[226px] w-60 flex flex-col items-center z-25">
             <div class="w-full h-4 bg-gradient-to-r from-slate-100 via-white to-slate-200 rounded-full shadow-md border-t border-b-2 border-pink-100 relative flex items-center justify-center">
-              <div class="w-52 h-1 bg-gradient-to-r from-transparent via-amber-200/70 to-transparent rounded-full"></div>
+              <div class="w-56 h-1 bg-gradient-to-r from-transparent via-amber-200/70 to-transparent rounded-full"></div>
             </div>
-            <div class="w-12 h-2.5 bg-gradient-to-b from-slate-200 to-slate-100 shadow-inner -mt-0.5"></div>
-            <div class="w-24 h-2 bg-gradient-to-r from-slate-200 via-white to-slate-200 rounded-full shadow-sm border-t border-slate-200"></div>
+            <div class="w-14 h-2.5 bg-gradient-to-b from-slate-200 to-slate-100 shadow-inner -mt-0.5"></div>
+            <div class="w-28 h-2 bg-gradient-to-r from-slate-200 via-white to-slate-200 rounded-full shadow-sm border-t border-slate-200"></div>
+            <div class="w-48 h-3.5 bg-rose-950/20 rounded-full blur-[4px] mt-0.5 pointer-events-none"></div>
           </div>
 
-          <!-- Bottom Drop Shadow -->
-          <div class="w-44 h-3 bg-rose-950/15 rounded-full blur-[4px] -mt-1 pointer-events-none"></div>
         </div>
 
         <!-- Hint Instruction -->
@@ -456,12 +475,17 @@
       </p>
 
       <div class="relative">
-        <!-- Cute Hanging Bunny Charm SVG Icon -->
-        <div class="doll-swing absolute -top-12 -right-6 sm:-right-8 z-30 pointer-events-none">
-          <div class="w-0.5 h-6 border-l-2 border-dotted border-pink-300 absolute -top-4 left-6 opacity-80"></div>
-          <div class="w-12 h-16 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-pink-200 flex flex-col items-center justify-center p-1 text-2xl">
-            🐰
-            <span class="text-[9px] font-cute text-pink-500 font-bold -mt-1">Oil</span>
+        <!-- Cute Hanging Bunny Charm: แสดงภาพ bunny.png แทนรูปกระต่ายเดิม -->
+        <div class="doll-swing absolute -top-14 -right-6 sm:-right-8 z-30 pointer-events-none flex flex-col items-center">
+          <!-- เชือกห้อยพวงกุญแจ -->
+          <div class="w-0.5 h-6 border-l-2 border-dotted border-pink-300 opacity-80 mb-[-2px]"></div>
+          
+          <!-- กรอบพวงกุญแจตุ๊กตา bunny.png -->
+          <div class="w-14 h-18 bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-pink-200 flex flex-col items-center justify-center p-1.5 transition-transform hover:scale-105">
+            <div class="w-11 h-11 flex items-center justify-center overflow-hidden">
+              <img src="bunny.png" alt="Bunny Doll" class="w-full h-full object-contain drop-shadow-sm" onerror="this.onerror=null; this.parentElement.innerHTML='🐰';">
+            </div>
+            <span class="text-[9px] font-cute text-pink-500 font-bold mt-0.5 leading-none">Oil</span>
           </div>
         </div>
 
@@ -777,7 +801,7 @@
       const cakeCard = document.getElementById('cakeCard');
       const giftBox = document.getElementById('giftBoxContainer');
 
-      flame.style.transform = 'scale(0)';
+      flame.style.transform = 'translateX(-50%) scale(0)';
       flame.style.opacity = '0';
       aura.style.opacity = '0';
       smoke.classList.add('smoke-active');

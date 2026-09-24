@@ -201,11 +201,11 @@
     }
 
     @keyframes wiggleDoll {
-      0%, 100% { transform: rotate(-4deg); }
-      50% { transform: rotate(6deg); }
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(7deg); }
     }
     .doll-swing {
-      animation: wiggleDoll 3s ease-in-out infinite;
+      animation: wiggleDoll 3.2s ease-in-out infinite;
       transform-origin: top center;
     }
 
@@ -475,17 +475,16 @@
       </p>
 
       <div class="relative">
-        <!-- Cute Hanging Bunny Charm: แสดงภาพ bunny.png แทนรูปกระต่ายเดิม -->
-        <div class="doll-swing absolute -top-14 -right-6 sm:-right-8 z-30 pointer-events-none flex flex-col items-center">
-          <!-- เชือกห้อยพวงกุญแจ -->
-          <div class="w-0.5 h-6 border-l-2 border-dotted border-pink-300 opacity-80 mb-[-2px]"></div>
+        <!-- Hanging Bunny Doll (ไม่มีกรอบ ห้อยตัวตุ๊กตาโดยตรง) -->
+        <div class="doll-swing absolute -top-16 -right-6 sm:-right-8 z-30 pointer-events-none flex flex-col items-center">
+          <!-- ห่วงและเชือกห้อยพวงกุญแจ -->
+          <div class="w-2.5 h-2.5 rounded-full border-2 border-pink-400/80 mb-[-1px] shadow-xs"></div>
+          <div class="w-0.5 h-7 border-l-2 border-dashed border-pink-300/80 mb-[-3px]"></div>
           
-          <!-- กรอบพวงกุญแจตุ๊กตา bunny.png -->
-          <div class="w-14 h-18 bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-pink-200 flex flex-col items-center justify-center p-1.5 transition-transform hover:scale-105">
-            <div class="w-11 h-11 flex items-center justify-center overflow-hidden">
-              <img src="bunny.png" alt="Bunny Doll" class="w-full h-full object-contain drop-shadow-sm" onerror="this.onerror=null; this.parentElement.innerHTML='🐰';">
-            </div>
-            <span class="text-[9px] font-cute text-pink-500 font-bold mt-0.5 leading-none">Oil</span>
+          <!-- ตัวตุ๊กตาห้อยอิสระพร้อมป้ายชื่อ -->
+          <div class="flex flex-col items-center group">
+            <img src="bunny.png" alt="Bunny Doll" class="w-16 h-16 object-contain drop-shadow-[0_8px_14px_rgba(244,63,94,0.3)] transition-transform group-hover:scale-110" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-3xl drop-shadow-md\'>🐰</span>';">
+            <span class="text-[10px] font-cute text-pink-500 font-bold bg-white/80 backdrop-blur-xs px-2 py-0.5 rounded-full shadow-xs -mt-1 border border-pink-100">Oil</span>
           </div>
         </div>
 

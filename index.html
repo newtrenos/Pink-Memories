@@ -201,11 +201,11 @@
     }
 
     @keyframes wiggleDoll {
-      0%, 100% { transform: rotate(-5deg); }
-      50% { transform: rotate(7deg); }
+      0%, 100% { transform: rotate(-6deg); }
+      50% { transform: rotate(8deg); }
     }
     .doll-swing {
-      animation: wiggleDoll 3.2s ease-in-out infinite;
+      animation: wiggleDoll 3s ease-in-out infinite;
       transform-origin: top center;
     }
 
@@ -475,17 +475,13 @@
       </p>
 
       <div class="relative">
-        <!-- Hanging Bunny Doll (ไม่มีกรอบ ห้อยตัวตุ๊กตาโดยตรง) -->
+        <!-- Hanging Bunny Doll: ห้อยเฉพาะตัวตุ๊กตา bunny.png ไม่มีกรอบ ไม่มีพื้นหลัง และไม่มีชื่อ -->
         <div class="doll-swing absolute -top-16 -right-6 sm:-right-8 z-30 pointer-events-none flex flex-col items-center">
-          <!-- ห่วงและเชือกห้อยพวงกุญแจ -->
-          <div class="w-2.5 h-2.5 rounded-full border-2 border-pink-400/80 mb-[-1px] shadow-xs"></div>
-          <div class="w-0.5 h-7 border-l-2 border-dashed border-pink-300/80 mb-[-3px]"></div>
+          <!-- เชือกห้อยพวงกุญแจ -->
+          <div class="w-0.5 h-8 border-l-2 border-dotted border-pink-400 opacity-80"></div>
           
-          <!-- ตัวตุ๊กตาห้อยอิสระพร้อมป้ายชื่อ -->
-          <div class="flex flex-col items-center group">
-            <img src="bunny.png" alt="Bunny Doll" class="w-16 h-16 object-contain drop-shadow-[0_8px_14px_rgba(244,63,94,0.3)] transition-transform group-hover:scale-110" onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'text-3xl drop-shadow-md\'>🐰</span>';">
-            <span class="text-[10px] font-cute text-pink-500 font-bold bg-white/80 backdrop-blur-xs px-2 py-0.5 rounded-full shadow-xs -mt-1 border border-pink-100">Oil</span>
-          </div>
+          <!-- ตัวตุ๊กตาห้อยอิสระเพียว ๆ (ลบกรอบขาว พื้นหลัง และชื่อ Oil ออกเรียบร้อย) -->
+          <img src="bunny.png" alt="Bunny Doll" class="w-16 h-16 object-contain -mt-1 drop-shadow-[0_8px_16px_rgba(244,63,94,0.35)]" onerror="this.onerror=null; this.src='https://placehold.co/100x100/transparent/transparent?text=🐰';">
         </div>
 
         <!-- Interactive Post-It Card -->

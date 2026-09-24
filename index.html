@@ -8,7 +8,7 @@
   <!-- Google Fonts: Mali & Prompt -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Mali:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Prompt:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -24,7 +24,7 @@
 
     body {
       font-family: 'Prompt', sans-serif;
-      background: linear-gradient(180deg, #FFE5EC 0%, #FFCAD4 22%, #E0F2FE 70%, #D8E2DC 100%);
+      background: linear-gradient(180deg, #FFE5EC 0%, #FFCAD4 20%, #E0F2FE 65%, #D8E2DC 100%);
       color: #374151;
       min-height: 100vh;
       overflow-x: hidden;
@@ -40,17 +40,17 @@
       transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* ดีไซน์เปลวไฟ & แสงสะท้อน */
+    /* Candle Flame & Glow Animations */
     @keyframes glowPulse {
-      0%, 100% { opacity: 0.65; transform: scale(1); }
+      0%, 100% { opacity: 0.6; transform: scale(1); }
       50% { opacity: 0.95; transform: scale(1.18); }
     }
     .flame-aura {
       position: absolute;
-      top: -12px;
-      width: 76px;
-      height: 76px;
-      background: radial-gradient(circle, rgba(254, 240, 138, 0.55) 0%, rgba(251, 146, 60, 0.25) 50%, transparent 75%);
+      top: -14px;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, rgba(254, 240, 138, 0.6) 0%, rgba(251, 146, 60, 0.25) 50%, transparent 75%);
       border-radius: 50%;
       animation: glowPulse 2s infinite ease-in-out;
       pointer-events: none;
@@ -59,19 +59,19 @@
 
     @keyframes flameDance {
       0% { transform: scale(1) rotate(-1.5deg); }
-      25% { transform: scale(1.05, 0.96) rotate(1.5deg); }
-      50% { transform: scale(0.97, 1.05) rotate(-1deg); }
+      25% { transform: scale(1.06, 0.94) rotate(1.5deg); }
+      50% { transform: scale(0.96, 1.05) rotate(-1deg); }
       75% { transform: scale(1.04, 1.02) rotate(1deg); }
       100% { transform: scale(1) rotate(-1.5deg); }
     }
     .flame-body {
       position: absolute;
       top: 6px;
-      width: 17px;
-      height: 30px;
+      width: 18px;
+      height: 32px;
       background: linear-gradient(to bottom, #FFF7ED 0%, #FDE047 25%, #FB923C 70%, #F43F5E 100%);
       border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
-      box-shadow: 0 0 16px #FBBF24, 0 0 26px rgba(251, 146, 60, 0.6);
+      box-shadow: 0 0 16px #FBBF24, 0 0 28px rgba(251, 146, 60, 0.65);
       animation: flameDance 1.2s infinite ease-in-out;
       transform-origin: bottom center;
       z-index: 12;
@@ -98,26 +98,26 @@
       transform: translateX(-50%);
       width: 11px;
       height: 7px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.85) 0%, transparent 80%);
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.9) 0%, transparent 80%);
       border-radius: 50%;
-      opacity: 0.8;
+      opacity: 0.85;
     }
 
     .candle-wick {
       width: 2.5px;
-      height: 9px;
+      height: 10px;
       background: #475569;
       border-radius: 2px;
-      margin-top: 24px;
+      margin-top: 25px;
       z-index: 11;
     }
 
     .candle-stick {
       width: 14px;
-      height: 50px;
+      height: 52px;
       background: repeating-linear-gradient(-45deg, #FFCAD4, #FFCAD4 7px, #FFFFFF 7px, #FFFFFF 14px);
       border-radius: 4px 4px 2px 2px;
-      box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.08), inset 2px 0 3px rgba(255, 255, 255, 0.7), 0 3px 6px rgba(0, 0, 0, 0.05);
+      box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.08), inset 2px 0 3px rgba(255, 255, 255, 0.7), 0 3px 6px rgba(0, 0, 0, 0.06);
       position: relative;
       z-index: 11;
     }
@@ -135,15 +135,15 @@
 
     @keyframes smokeDrift {
       0% { opacity: 0.8; transform: translateY(0) scale(1) translateX(0); }
-      50% { opacity: 0.5; transform: translateY(-20px) scale(1.6) translateX(4px); }
-      100% { opacity: 0; transform: translateY(-42px) scale(2.4) translateX(-8px); }
+      50% { opacity: 0.5; transform: translateY(-22px) scale(1.7) translateX(5px); }
+      100% { opacity: 0; transform: translateY(-46px) scale(2.6) translateX(-8px); }
     }
     .smoke-puff {
       position: absolute;
       top: 15px;
-      width: 7px;
-      height: 7px;
-      background: rgba(226, 232, 240, 0.85);
+      width: 8px;
+      height: 8px;
+      background: rgba(226, 232, 240, 0.9);
       border-radius: 50%;
       filter: blur(2px);
       pointer-events: none;
@@ -151,7 +151,7 @@
     }
     .smoke-active {
       display: block;
-      animation: smokeDrift 1.5s ease-out forwards;
+      animation: smokeDrift 1.6s ease-out forwards;
     }
 
     @keyframes boxBounce {
@@ -189,7 +189,7 @@
 
     @keyframes wiggleDoll {
       0%, 100% { transform: rotate(-3deg); }
-      50% { transform: rotate(6deg); }
+      50% { transform: rotate(5deg); }
     }
     .doll-swing {
       animation: wiggleDoll 3s ease-in-out infinite;
@@ -207,8 +207,8 @@
 
     @keyframes floatPetal {
       0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-      15% { opacity: 0.7; }
-      85% { opacity: 0.7; }
+      15% { opacity: 0.75; }
+      85% { opacity: 0.75; }
       100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
     }
     .floating-petal {
@@ -222,18 +222,34 @@
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .polaroid-card:hover {
-      transform: scale(1.04) rotate(0deg) !important;
-      box-shadow: 0 14px 28px -4px rgba(244, 114, 182, 0.25);
+      transform: scale(1.05) rotate(0deg) !important;
+      box-shadow: 0 16px 30px -4px rgba(244, 114, 182, 0.3);
       z-index: 15;
+    }
+
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+    .cake-floating {
+      animation: gentleFloat 3.8s ease-in-out infinite;
+    }
+
+    @keyframes sparkleBlink {
+      0%, 100% { opacity: 0.35; transform: scale(0.85) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.2) rotate(15deg); }
+    }
+    .sparkle-star {
+      animation: sparkleBlink 2.2s infinite ease-in-out;
     }
   </style>
 </head>
 <body class="relative flex flex-col items-center pb-24">
 
-  <!-- ดอกไม้ลอยพื้นหลัง -->
+  <!-- Floating Flower Petals Container -->
   <div id="petalContainer" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
 
-  <!-- ระบบเล่นเพลง 2 ช่วง -->
+  <!-- Audio Players for Stage 1 and Stage 2 -->
   <audio id="bgMusic1" loop preload="auto">
     <source src="https://github.com/newtrenos/Pink-Memories/raw/refs/heads/main/Happy%20Birthday%20Piano%20Version.mp3" type="audio/mp3">
   </audio>
@@ -242,18 +258,17 @@
     <source src="https://github.com/newtrenos/Pink-Memories/raw/refs/heads/main/%E0%B8%82%E0%B8%AD%E0%B8%9A%E0%B8%84%E0%B8%B8%E0%B8%93%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%80%E0%B8%81%E0%B8%B4%E0%B8%94%E0%B8%A1%E0%B8%B2%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%A3%E0%B8%B1%E0%B8%81%20found%20MEAN%20ft.JIXGO%20Live%20Session.mp3" type="audio/mp3">
   </audio>
 
-  <!-- ปุ่มควบคุมเพลง -->
+  <!-- Top Controls: Music Toggle -->
   <div class="fixed top-4 right-4 z-50">
-    <button id="soundBtn" onclick="toggleCurrentMusic(event)" class="bg-white/85 backdrop-blur-md px-4 py-2 rounded-full shadow-md text-xs font-cute text-pink-600 border border-pink-200 flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer">
+    <button id="soundBtn" onclick="toggleCurrentMusic(event)" class="bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-md text-xs font-cute text-pink-600 border border-pink-200 flex items-center gap-1.5 active:scale-95 transition-all cursor-pointer">
       <span id="soundIcon">🎵</span>
       <span id="soundLabel">กำลังเล่นเพลง</span>
     </button>
   </div>
 
-  <!-- ==================== หน้าที่ 1: เป่าเค้ก & รับกล่องของขวัญ ==================== -->
   <section id="step-birthday" class="min-h-screen w-full max-w-md px-6 flex flex-col justify-center items-center text-center relative z-20 fade-transition opacity-100 transform translate-y-0">
     
-    <div class="bg-white/75 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-cute text-pink-600 mb-6 shadow-sm border border-pink-100">
+    <div class="bg-white/80 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-cute text-pink-600 mb-6 shadow-sm border border-pink-100">
       ☁️ 24 กันยายน • A Very Special Day for Oil
     </div>
 
@@ -261,14 +276,26 @@
       สุขสันต์วันเกิดนะ <br><span class="text-pink-500 underline decoration-pink-300 decoration-wavy underline-offset-4">Oil</span> 🌸
     </h1>
     <p class="text-xs md:text-sm text-slate-500 mb-8 max-w-xs leading-relaxed">
-      ขอให้ท้องฟ้าและสายลม<br>มอบความสบายใจและรอยยิ้มสดใสให้กับเธอในวันนี้<br>และตลอดไปนะ
+      ขอให้ท้องฟ้าและสายลม<br>มอบความสบายใจและรอยยิ้มที่สดใสให้กับเธอในวันนี้<br>และตลอดไปนะ
     </p>
 
-    <div class="relative w-full max-w-[310px] min-h-[310px] flex items-center justify-center">
+    <div class="relative w-full max-w-[320px] min-h-[320px] flex items-center justify-center">
 
-      <!-- ตัวเค้ก -->
-      <div id="cakeCard" class="w-full bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-xl border border-pink-100 fade-transition opacity-100 transform scale-100">
-        <div class="relative w-40 h-48 mx-auto flex flex-col items-center justify-end cursor-pointer select-none" onclick="blowCandle(event)">
+      <!-- Pastel Artisan Cake Card -->
+      <div id="cakeCard" class="w-full bg-white/95 backdrop-blur-2xl p-7 rounded-[2.5rem] shadow-[0_22px_55px_-10px_rgba(244,63,94,0.28)] border-2 border-white ring-8 ring-pink-100/50 fade-transition opacity-100 scale-100 relative overflow-hidden">
+        
+        <!-- Soft Glow in the background of the cake -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 bg-gradient-to-tr from-pink-200/45 via-rose-100/30 to-amber-100/40 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Ambient Sparkles -->
+        <span class="sparkle-star absolute top-6 left-6 text-amber-300 text-sm pointer-events-none select-none">✨</span>
+        <span class="sparkle-star absolute top-10 right-8 text-pink-300 text-base pointer-events-none select-none" style="animation-delay: 1s;">🌸</span>
+        <span class="sparkle-star absolute bottom-16 left-8 text-rose-300 text-xs pointer-events-none select-none" style="animation-delay: 1.5s;">💖</span>
+
+        <!-- Floating Cake & Tap Flame to Blow -->
+        <div class="cake-floating relative w-52 h-64 mx-auto flex flex-col items-center justify-end cursor-pointer select-none group" onclick="blowCandle(event)">
+          
+          <!-- Candle Flame & Auras -->
           <div id="flameAura" class="flame-aura"></div>
           <div id="smokePuff" class="smoke-puff"></div>
 
@@ -277,31 +304,102 @@
             <div class="flame-blue-base"></div>
           </div>
 
+          <!-- Wick -->
           <div class="candle-wick"></div>
-          <div class="candle-stick"></div>
-
-          <div class="w-28 h-12 bg-pink-100 rounded-t-2xl border-b-4 border-pink-200 flex items-center justify-around px-2 relative z-0 shadow-sm">
-            <span class="w-2.5 h-2.5 rounded-full bg-pink-300"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-pink-300"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-pink-300"></span>
+          
+          <!-- Candle Stick -->
+          <div class="relative z-20">
+            <div class="candle-stick shadow-sm"></div>
+            <div class="w-5 h-1.5 bg-gradient-to-r from-amber-300 via-yellow-100 to-amber-300 rounded-full mx-auto -mt-1 border border-amber-400/40"></div>
           </div>
 
-          <div class="w-36 h-14 bg-white rounded-b-2xl border-t border-pink-100 shadow-inner flex items-center justify-around px-3">
-            <span class="text-sm">🍓</span>
-            <span class="text-sm">🌸</span>
-            <span class="text-sm">🍓</span>
+          <!-- Cake Toppings: Berries & Whipped Cream -->
+          <div class="relative z-20 flex items-end justify-center -mb-2 w-full px-8">
+            <span class="text-sm drop-shadow-md transform -rotate-12 hover:scale-125 transition-transform">🫐</span>
+            <div class="w-5 h-5 bg-gradient-to-b from-white to-pink-50 rounded-full border border-pink-100 shadow-sm flex items-center justify-center -mx-1 z-10">
+              <span class="w-1.5 h-1.5 bg-pink-300 rounded-full"></span>
+            </div>
+            <span class="text-xl drop-shadow-md transform -translate-y-1 hover:scale-125 transition-transform">🍓</span>
+            <div class="w-5 h-5 bg-gradient-to-b from-white to-pink-50 rounded-full border border-pink-100 shadow-sm flex items-center justify-center -mx-1 z-10">
+              <span class="w-1.5 h-1.5 bg-pink-300 rounded-full"></span>
+            </div>
+            <span class="text-sm drop-shadow-md transform rotate-12 hover:scale-125 transition-transform">🍓</span>
           </div>
 
-          <div class="w-44 h-3.5 bg-pink-200/80 rounded-full mt-1 shadow-sm"></div>
+          <!-- Cake Tier 1 -->
+          <div class="w-36 h-16 bg-gradient-to-b from-[#FFFDF9] via-[#FFF8FA] to-[#FFE9EE] rounded-t-[1.6rem] border-x-2 border-t-2 border-pink-200/90 shadow-[inset_0_2px_4px_rgba(255,255,255,0.8),0_6px_12px_rgba(244,63,94,0.12)] flex flex-col justify-between items-center relative z-10 overflow-hidden">
+            
+            <!-- Silky Strawberry Jam Drip -->
+            <div class="w-full relative">
+              <svg class="w-full h-7 text-rose-500 fill-current drop-shadow-[0_2px_3px_rgba(225,29,72,0.25)]" viewBox="0 0 140 28" preserveAspectRatio="none">
+                <path d="M0,0 L140,0 L140,8 C135,16 130,17 125,10 C120,3 115,20 108,20 C101,20 98,6 92,6 C86,6 83,24 75,24 C67,24 64,8 58,8 C52,8 48,18 41,18 C34,18 31,4 25,4 C19,4 15,16 8,14 C4,13 2,5 0,8 Z"></path>
+              </svg>
+              <div class="absolute top-0.5 left-2 right-2 h-1 bg-white/40 rounded-full"></div>
+            </div>
+
+            <!-- Colorful Sprinkles -->
+            <div class="w-full flex items-center justify-around px-4 pb-2 text-[8px]">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-xs transform rotate-45"></span>
+              <span class="w-2 h-1 rounded-full bg-pink-400 shadow-xs"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-400 shadow-xs"></span>
+              <span class="w-2 h-1 rounded-full bg-sky-300 shadow-xs transform -rotate-12"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-300 shadow-xs"></span>
+            </div>
+          </div>
+
+          <!-- Cream Pearl Ribbon separator -->
+          <div class="w-40 h-3 bg-gradient-to-r from-pink-100 via-white to-pink-100 rounded-full shadow-sm z-20 -my-1.5 border border-pink-200/70 flex items-center justify-around px-1">
+            <span class="w-2 h-2 rounded-full bg-white shadow-xs"></span>
+            <span class="w-2 h-2 rounded-full bg-white shadow-xs"></span>
+            <span class="w-2 h-2 rounded-full bg-white shadow-xs"></span>
+            <span class="w-2 h-2 rounded-full bg-white shadow-xs"></span>
+            <span class="w-2 h-2 rounded-full bg-white shadow-xs"></span>
+            <span class="w-2 h-2 rounded-full bg-white shadow-xs"></span>
+            <span class="w-2 h-2 rounded-full bg-white shadow-xs"></span>
+          </div>
+
+          <!-- Cake Tier 2 -->
+          <div class="w-48 h-20 bg-gradient-to-b from-[#FFD8E2] via-[#FFC0D0] to-[#FFA8BF] rounded-b-2xl border-2 border-pink-300/80 shadow-[inset_0_2px_4px_rgba(255,255,255,0.6),0_10px_20px_rgba(225,29,72,0.18)] flex flex-col justify-between items-center px-3 py-2 relative z-0">
+            <div class="w-full h-1.5 bg-gradient-to-r from-rose-400 via-rose-500 to-rose-400 rounded-full shadow-inner opacity-80 mt-1"></div>
+
+            <!-- Plaque with Birthday Wish -->
+            <div class="bg-white/95 backdrop-blur-sm border border-pink-200 px-3.5 py-1 rounded-full shadow-sm flex items-center gap-1.5 transform hover:scale-105 transition-transform my-auto">
+              <span class="text-[10px]">✨</span>
+              <span class="font-cute font-bold text-pink-600 text-xs tracking-wide">Happy Birthday Oil 🌸</span>
+              <span class="text-[10px]">✨</span>
+            </div>
+
+            <div class="w-full flex items-center justify-between px-3 text-xs -mb-0.5 opacity-90">
+              <span>🍓</span>
+              <span class="text-[10px] text-pink-500/80">🤍</span>
+              <span>🍓</span>
+            </div>
+          </div>
+
+          <!-- Ceramic Cake Stand -->
+          <div class="relative w-56 flex flex-col items-center mt-0.5 z-10">
+            <div class="w-full h-4 bg-gradient-to-r from-slate-100 via-white to-slate-200 rounded-full shadow-md border-t border-b-2 border-pink-100 relative flex items-center justify-center">
+              <div class="w-52 h-1 bg-gradient-to-r from-transparent via-amber-200/70 to-transparent rounded-full"></div>
+            </div>
+            <div class="w-12 h-2.5 bg-gradient-to-b from-slate-200 to-slate-100 shadow-inner -mt-0.5"></div>
+            <div class="w-24 h-2 bg-gradient-to-r from-slate-200 via-white to-slate-200 rounded-full shadow-sm border-t border-slate-200"></div>
+          </div>
+
+          <!-- Bottom Drop Shadow -->
+          <div class="w-44 h-3 bg-rose-950/15 rounded-full blur-[4px] -mt-1 pointer-events-none"></div>
         </div>
 
-        <p id="cakeHint" class="text-xs font-cute text-pink-500 font-semibold mt-6 animate-pulse">
-          ✨ ตั้งใจอธิษฐานแล้วแตะที่เปลวไฟนะ ✨
-        </p>
+        <!-- Hint Instruction -->
+        <div class="mt-4 flex justify-center">
+          <p id="cakeHint" class="text-xs font-cute text-pink-600 font-bold animate-pulse bg-gradient-to-r from-pink-50 via-rose-50 to-pink-50 py-2 px-5 rounded-full shadow-sm border border-pink-200 flex items-center gap-1.5">
+            <span>✨</span> ตั้งใจอธิษฐานแล้วแตะที่เปลวไฟนะ <span>🌸</span>
+          </p>
+        </div>
+
       </div>
 
-      <!-- กล่องของขวัญ -->
-      <div id="giftBoxContainer" class="absolute inset-0 bg-white/85 backdrop-blur-md p-6 rounded-3xl shadow-xl border border-pink-100 flex flex-col items-center justify-center fade-transition opacity-0 transform scale-75 pointer-events-none hidden">
+      <!-- Gift Box (Revealed after candle is blown) -->
+      <div id="giftBoxContainer" class="absolute inset-0 bg-white/90 backdrop-blur-md p-6 rounded-3xl shadow-2xl border border-pink-100 flex flex-col items-center justify-center fade-transition opacity-0 scale-75 pointer-events-none hidden">
         <div class="box-bounce cursor-pointer my-3" onclick="openGiftBox(event)">
           <div class="w-28 h-28 bg-gradient-to-br from-pink-400 to-rose-400 rounded-3xl shadow-2xl flex items-center justify-center text-5xl border-2 border-white relative active:scale-95 transition-transform hover:scale-105">
             🎁
@@ -316,7 +414,6 @@
 
   </section>
 
-  <!-- ==================== หน้าที่ 2: สมุดภาพความทรงจำ 24 รูป ==================== -->
   <section id="step-memory" class="hidden opacity-0 transform translate-y-8 fade-transition w-full max-w-2xl px-4 flex-col items-center z-20 pt-8">
 
     <div class="bg-white/85 backdrop-blur-md p-6 rounded-3xl shadow-md border border-pink-100 text-center mb-8 w-full max-w-lg">
@@ -329,12 +426,12 @@
       </p>
     </div>
 
-    <!-- กริดแสดงรูป 24 ภาพ -->
+    <!-- 24 Polaroids Grid -->
     <div id="memoryGrid" class="grid grid-cols-3 gap-2.5 sm:gap-4 w-full mb-12">
-      <!-- ข้อมูลเรนเดอร์ผ่าน JS -->
+      <!-- Injected via JavaScript -->
     </div>
 
-    <!-- จดหมายคำอวยพร -->
+    <!-- Birthday Wish Note -->
     <div class="bg-white/90 backdrop-blur-md p-6 sm:p-7 rounded-3xl shadow-lg border border-pink-100 w-full max-w-lg mb-12 relative">
       <div class="font-cute text-pink-500 font-bold text-lg mb-3 flex items-center gap-2">
         <span>💌</span> ถึง Oil...
@@ -344,7 +441,7 @@
           สุขสันต์วันเกิด ขอให้ออยมีสุขภาพแข็งแรง มีแต่สิ่งดี ๆ เข้ามาในชีวิต ไม่ว่าจะเจอเรื่องหนักใจหรือเหนื่อยล้าแค่ไหน ขอให้ผ่านพ้นไปด้วยดีเสมอ
         </p>
         <p>
-          ขอบคุณสำหรับความสดใส ความใจดี และทุก ๆ ความรู้สึกดี ๆ ที่มีให้กันตลอด<br> 1 ปีที่ผ่านมานะ เราจะคอยซัพพอร์ตเธอ คอยอยู่ข้างๆ และรับฟังเธอเสมอเลย
+          ขอบคุณสำหรับความสดใส ความใจดี และทุก ๆ ความรู้สึกดี ๆ ที่มีให้กันตลอด<br> 1 ปีที่ผ่านมานะ เราจะคอยซัพพอร์ตเธอ คอยอยู่ข้างๆ และรับฟังเธอเสมอ
         </p>
       </div>
       <div class="text-right text-xs font-cute text-pink-400 mt-5">
@@ -352,22 +449,25 @@
       </div>
     </div>
 
-    <!-- โพสต์อิทเปิดคำถาม พร้อมตุ๊กตาน้องกระต่ายห้อย -->
+    <!-- Sticky Note for Proposal -->
     <div class="w-full flex flex-col items-center mb-16 relative">
       <p class="text-xs font-cute text-pink-600 font-medium mb-4 animate-bounce">
         👇 มีอีกหนึ่งความในใจเล็กๆ ที่อยากถาม...
       </p>
 
       <div class="relative">
-        <!-- ตัวตุ๊กตาน้องกระต่ายห้อยดุ๊กดิ๊กด้านขวาบน -->
-        <div class="doll-swing absolute -top-14 -right-8 sm:-right-10 z-30 pointer-events-none">
-          <div class="w-1 h-5 border-l-2 border-dotted border-slate-400 absolute -top-3 left-6 opacity-75"></div>
-          <img src="bunny.png" alt="Bunny Keychain" class="w-20 sm:w-24 drop-shadow-xl select-none">
+        <!-- Cute Hanging Bunny Charm SVG Icon -->
+        <div class="doll-swing absolute -top-12 -right-6 sm:-right-8 z-30 pointer-events-none">
+          <div class="w-0.5 h-6 border-l-2 border-dotted border-pink-300 absolute -top-4 left-6 opacity-80"></div>
+          <div class="w-12 h-16 bg-white/90 backdrop-blur-sm rounded-full shadow-lg border border-pink-200 flex flex-col items-center justify-center p-1 text-2xl">
+            🐰
+            <span class="text-[9px] font-cute text-pink-500 font-bold -mt-1">Oil</span>
+          </div>
         </div>
 
-        <!-- แผ่นโพสต์อิท -->
+        <!-- Interactive Post-It Card -->
         <div id="stickyPreview" onclick="revealProposal(event)" class="post-it-swing cursor-pointer relative bg-amber-100 p-6 rounded-2xl shadow-lg border border-amber-200 w-64 text-center transform hover:scale-105 active:scale-95 transition-all">
-          <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-7 h-7 bg-slate-200 rounded-full border border-slate-300 flex items-center justify-center text-xs shadow-sm z-20">
+          <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-7 h-7 bg-red-400 text-white rounded-full border-2 border-white flex items-center justify-center text-xs shadow-md z-20">
             📌
           </div>
           <p class="font-cute text-sm font-bold text-amber-800">
@@ -382,7 +482,7 @@
 
   </section>
 
-  <!-- ==================== Modal คำขอเป็นแฟน ==================== -->
+  <!-- Proposal Modal -->
   <div id="proposalModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-500 flex items-center justify-center p-5">
     <div class="bg-gradient-to-b from-amber-50 to-orange-50 w-full max-w-sm p-7 rounded-[2rem] shadow-2xl border-2 border-amber-200 relative text-center transform scale-90 transition-transform duration-500" id="proposalCard">
       
@@ -416,15 +516,15 @@
       <div id="acceptedMessage" class="hidden opacity-0 transition-opacity duration-700 mt-4 pt-4 border-t border-pink-200">
         <p class="font-cute text-lg font-bold text-pink-600 mb-1">🎉 ขอบคุณนะ 🌸</p>
         <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
-          จากนี้ไม่ว่าจะเกิดอะไรขึ้น ความทุกข์หรือความสุข <br>เราจะมือกันไว้เสมอ... 🤍
+          จากนี้ไม่ว่าจะเกิดอะไรขึ้น ความทุกข์หรือความสุข <br>เราจะจับมือกันไว้เสมอ... 🤍
         </p>
       </div>
 
     </div>
   </div>
 
-  <!-- Modal ขยายภาพ (Lightbox) -->
-  <div id="photoLightbox" onclick="closeLightbox()" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300 flex flex-col items-center justify-center p-4">
+  <!-- Lightbox Modal -->
+  <div id="photoLightbox" onclick="closeLightbox()" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300 flex flex-col items-center justify-center p-4">
     <div class="relative max-w-sm w-full bg-white p-4 pb-6 rounded-2xl shadow-2xl text-center transform scale-95 transition-transform duration-300" id="lightboxCard" onclick="event.stopPropagation()">
       <button onclick="closeLightbox()" class="absolute top-2 right-3 text-slate-400 hover:text-slate-600 text-xl font-bold p-1 cursor-pointer">✕</button>
       <div class="w-full h-72 rounded-xl overflow-hidden mb-3 bg-slate-100 flex items-center justify-center">
@@ -435,7 +535,7 @@
     </div>
   </div>
 
-  <!-- คลื่นทะเลด้านล่าง -->
+  <!-- Ocean Waves Graphic at Bottom -->
   <div class="fixed bottom-0 left-0 w-full overflow-hidden leading-none z-10 pointer-events-none opacity-40">
     <svg class="w-[200%] h-20 wave-anim" viewBox="0 0 1200 120" preserveAspectRatio="none">
       <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,40 L1200,120 L0,120 Z" fill="#FFFFFF"></path>
@@ -444,7 +544,7 @@
 
   <script>
     /* =========================================
-       1. ข้อมูลรูปภาพ 24 รายการ
+       1. Photo Data with Safe Image Loaders
        ========================================= */
     const memoriesData = [
       { id: 1, title: "Memory 1 🌸", desc: "การได้ใช้ชีวิตในวันธรรมดาด้วยกัน", tapeBg: "rgba(255, 202, 212, 0.85)", bg: "FFE5EC/D9658B", imgUrl: "https://lh3.googleusercontent.com/d/1umQDTHAx_sTpkyVhkNz5bu1HGMk2rlub" },
@@ -479,7 +579,9 @@
 
       grid.innerHTML = memoriesData.map((item, index) => {
         const rot = rotations[index % rotations.length];
-        const photoImg = item.imgUrl && item.imgUrl.trim() !== "" ? item.imgUrl : `https://placehold.co/400x520/${item.bg}?text=Oil+${item.id}`;
+        const photoImg = item.imgUrl && item.imgUrl.trim() !== "" 
+          ? item.imgUrl 
+          : `https://placehold.co/400x520/${item.bg}?text=Oil+${item.id}`;
 
         return `
           <div onclick="openLightbox('${photoImg}', '${item.title}', '${item.desc}')" 
@@ -487,7 +589,7 @@
             <div class="washi-tape" style="background: ${item.tapeBg};"></div>
             <div class="w-full h-28 sm:h-36 md:h-44 bg-slate-50 rounded-lg sm:rounded-xl overflow-hidden mb-1.5 sm:mb-2 flex items-center justify-center border border-pink-50 relative group">
               <img src="${photoImg}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x520/FFE5EC/D9658B?text=Oil+Memory';">
-              <div class="absolute inset-0 bg-black/15 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-[10px] sm:text-xs">
+              <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-[10px] sm:text-xs">
                 🔍 ขยาย
               </div>
             </div>
@@ -528,7 +630,7 @@
 
     function spawnFloatingPetals() {
       const container = document.getElementById('petalContainer');
-      const petalChars = ['🌸', '✨', '🤍', '🌷', '🫧'];
+      const petalChars = ['🌸', '✨', '🤍', '🌷', '🫧', '🍃'];
       for (let i = 0; i < 16; i++) {
         const petal = document.createElement('div');
         petal.className = 'floating-petal text-sm select-none';
@@ -543,9 +645,6 @@
     }
     spawnFloatingPetals();
 
-    /* =========================================
-       2. ระบบเล่นเพลงอัตโนมัติ & สลับเพลงไร้รอยต่อ
-       ========================================= */
     const music1 = document.getElementById('bgMusic1');
     const music2 = document.getElementById('bgMusic2');
     let activeMusic = music1;
@@ -664,9 +763,6 @@
       }
     }
 
-    /* =========================================
-       3. การเป่าเทียน
-       ========================================= */
     let candleBlown = false;
 
     function blowCandle(e) {
@@ -720,9 +816,6 @@
       }, 1200);
     }
 
-    /* =========================================
-       4. เปิดกล่องของขวัญ
-       ========================================= */
     function openGiftBox(e) {
       if (e) e.stopPropagation();
 
@@ -757,9 +850,6 @@
       }, 650);
     }
 
-    /* =========================================
-       5. คำขอเป็นแฟน และ Webhook Formspree
-       ========================================= */
     function sendEmailNotification(chosenAnswer) {
       const formspreeUrl = "https://formspree.io/f/xqpabyld";
 
